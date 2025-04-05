@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     minikube
+    govc
+    mongodb-compass
     docker-compose
     ansible
     btop  # replacement of htop/nmon
@@ -14,6 +16,7 @@
     dnsutils  # `dig` + `nslookup`
     ethtool
     fzf # A command-line fuzzy finder
+    talosctl
     gawk
     gcc
     git
@@ -48,7 +51,7 @@
     which
     yq-go # yaml processor https://github.com/mikefarah/yq
     zig
-  ];
+ ];
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -65,6 +68,7 @@
     shellAliases = {
       nixedit = "nvim ~/.config/nixos";
       nixup   = "nixos-rebuild switch --use-remote-sudo --flake ~/.config/nixos";
+      s = "switch";
     };
     oh-my-zsh = {
       enable = true;
@@ -73,6 +77,8 @@
     };
     initExtra = ''
       PROMPT='$(kube_ps1)'$PROMPT
+      source <(switcher init zsh)
+      source <(switch completion zsh)
     '';
   };
     programs.neovim = {

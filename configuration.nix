@@ -64,7 +64,6 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.hosts = {
-  "10.94.6.5" = ["cinfrance.fr"];
 };
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
