@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     minikube
+    vault
+    super-slicer-latest
     govc
     mongodb-compass
     docker-compose
