@@ -24,13 +24,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-
-            home-manager.users.gaupee = import ./home.nix;
-
+            home-manager.users.gaupee = import ./home-manager/default.nix;
           }
- 
-      ];
+        ];
+      };
     };
   };
-};
 }
