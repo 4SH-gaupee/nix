@@ -7,6 +7,9 @@
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
     minikube
+    qbittorrent
+    mpv
+    qpwgraph
     vault
     super-slicer-latest
     govc
@@ -14,7 +17,7 @@
     docker-compose
     ansible
     btop  # replacement of htop/nmon
-    curl 
+    curl
     dnsutils  # `dig` + `nslookup`
     ethtool
     fzf # A command-line fuzzy finder
@@ -112,7 +115,71 @@
 	xmlformat
         shfmt
 	prettierd
-	];
+      ];
+      plugins = with pkgs.vimPlugins; [
+          {
+            plugin = conform-nvim;
+            type = "lua";
+            #config = (builtins.readFile ./files/plugins/conform.lua);
+          }
+          {
+            plugin = fzf-lua;
+            type = "lua";
+            #config = (builtins.readFile ./files/plugins/fzf-lua.lua);
+          }
+          {
+            plugin = gitsigns-nvim;
+            type = "lua";
+            #config = (builtins.readFile ./files/plugins/luasnip.lua);
+          }
+          {
+            plugin = lualine-nvim;
+            type = "lua";
+            #config = (builtins.readFile ./files/plugins/lualine.lua);
+          }
+          {
+           plugin = neo-tree-nvim;
+           type = "lua";
+           #config = (builtins.readFile ./files/plugins/neotree.lua);
+          }
+          {
+            plugin = nvim-lint;
+            type = "lua";
+            #config = ( builtins.readFile ./files/plugins/nvim-lint.lua);
+          }
+          {
+            plugin = nvim-sops;
+            type = "lua";
+            #config = (builtins.readFile ./files/plugins/nvim-sops.lua);
+          }
+          {
+            plugin = (nvim-treesitter.withPlugins (p: [
+                p.bash
+                p.dockerfile
+                p.hcl
+                p.helm
+                p.lua
+                p.llvm
+                p.markdown
+                p.markdown_inline
+                p.nix
+                p.python
+                p.terraform
+                p.vim
+                p.yaml
+              ])
+            );
+            type = "lua";
+            #config = ( builtins.readFile ./files/plugins/treesitter.lua);
+          }
+          {
+            plugin = nvim-treesitter-context;
+            type = "lua";
+            #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
+
+          }
+        ];
+
   };
 
 
