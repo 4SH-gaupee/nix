@@ -150,6 +150,9 @@
   environment.systemPackages = with pkgs; [
     neovim
     displaylink
+    gparted
+    ntfs3g
+    python313Packages.hvac
   ];
   programs.ssh.startAgent = true;
   programs.kdeconnect.enable = true;

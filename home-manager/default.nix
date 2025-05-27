@@ -6,14 +6,16 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+    python313Packages.hvac
     minikube
     qbittorrent
     mpv
     qpwgraph
     vault
-    super-slicer-latest
+    prusa-slicer
     govc
     mongodb-compass
+    kustomize
     docker-compose
     ansible
     btop  # replacement of htop/nmon
@@ -31,7 +33,6 @@
     iftop # network monitoring
     iotop # io monitoring
     jq # A lightweight and flexible command-line JSON processor
-    k9s
     k9s
     kdePackages.ksshaskpass
     kubectl
