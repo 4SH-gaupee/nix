@@ -9,6 +9,7 @@
     python313Packages.hvac
     minikube
     qbittorrent
+    kubectx
     mpv
     qpwgraph
     vault
