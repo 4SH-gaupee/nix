@@ -1,16 +1,20 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+   ../modules/home-manager/default.nix
+  ];
   home.username = "gaupee";
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
-    python313Packages.hvac
+    python313.withPackages (ps: [ ps.hvac ps.diagrams ])
     minikube
     qbittorrent
     kubectx
     mpv
+    freecad
     qpwgraph
     vault
     prusa-slicer
@@ -88,102 +92,6 @@
       source <(switch completion zsh)
     '';
   };
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
-      extraPackages = with pkgs; [
-        # LSP Servers
-        clang-tools
-        hadolint
-        helm-ls
-        lua-language-server
-        marksman
-        nil
-        nodePackages.bash-language-server
-        python3Packages.python-lsp-server
-        shellcheck
-
-        terraform-lsp
-        tflint
-        yaml-language-server
-	ansible-language-server
-
-        # Formatters
-        nixfmt-rfc-style
-	hclfmt
-	xmlformat
-        shfmt
-	prettierd
-      ];
-      plugins = with pkgs.vimPlugins; [
-          {
-            plugin = conform-nvim;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/conform.lua);
-          }
-          {
-            plugin = fzf-lua;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/fzf-lua.lua);
-          }
-          {
-            plugin = gitsigns-nvim;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/luasnip.lua);
-          }
-          {
-            plugin = lualine-nvim;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/lualine.lua);
-          }
-          {
-           plugin = neo-tree-nvim;
-           type = "lua";
-           #config = (builtins.readFile ./files/plugins/neotree.lua);
-          }
-          {
-            plugin = nvim-lint;
-            type = "lua";
-            #config = ( builtins.readFile ./files/plugins/nvim-lint.lua);
-          }
-          {
-            plugin = nvim-sops;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/nvim-sops.lua);
-          }
-          {
-            plugin = (nvim-treesitter.withPlugins (p: [
-                p.bash
-                p.dockerfile
-                p.hcl
-                p.helm
-                p.lua
-                p.llvm
-                p.markdown
-                p.markdown_inline
-                p.nix
-                p.python
-                p.terraform
-                p.vim
-                p.yaml
-              ])
-            );
-            type = "lua";
-            #config = ( builtins.readFile ./files/plugins/treesitter.lua);
-          }
-          {
-            plugin = nvim-treesitter-context;
-            type = "lua";
-            #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
-
-          }
-        ];
-
-  };
-
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
