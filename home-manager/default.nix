@@ -9,7 +9,7 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
-    python313.withPackages (ps: [ ps.hvac ps.diagrams ])
+    (python313.withPackages (ps: [ ps.hvac ps.diagrams ]))
     minikube
     qbittorrent
     kubectx

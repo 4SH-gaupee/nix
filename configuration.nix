@@ -148,18 +148,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     displaylink
     gparted
     ntfs3g
-    python313Packages.hvac
   ];
   programs.ssh.startAgent = true;
   programs.kdeconnect.enable = true;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
   virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
