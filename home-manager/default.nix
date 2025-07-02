@@ -1,5 +1,15 @@
 { config, pkgs, ... }:
-
+#let
+#  # Replace these values with the actual revision and sha256 for the desired nixpkgs commit
+#  terragruntPkgs = import (pkgs.fetchFromGitHub {
+#    owner = "NixOS";
+#    repo = "nixpkgs";
+#    rev = "REVISION_WITH_TERRAGRUNT_0_80_0";
+#    sha256 = "SHA256_FOR_THAT_REVISION";
+#  }) {
+#    inherit (pkgs) system;
+#  };
+#in
 {
   imports = [
    ../modules/home-manager/default.nix
@@ -12,6 +22,8 @@
     (python313.withPackages (ps: [ ps.hvac ps.diagrams ]))
     minikube
     qbittorrent
+    gh
+    ghq
     kubectx
     mpv
     freecad
@@ -78,8 +90,13 @@
     history.extended = true;
     shellAliases = {
       nixedit = "nvim ~/.config/nixos";
-      nixup   = "nixos-rebuild switch --use-remote-sudo --flake ~/.config/nixos";
+      nixup   = "nixos-rebuild switch --sudo --flake ~/.config/nixos";
       s = "switch";
+      tgp = "terragrunt plan";
+      tgpa = "terragrunt plan --all";
+      tga = "terragrunt apply";
+      tgaa = "terragrunt apply --all";
+      ghr = "gh fzf repo 4SH";
     };
     oh-my-zsh = {
       enable = true;

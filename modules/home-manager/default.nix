@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./cli/neovim
+    ./cli/neovim/default.nix
   ];
 }
 

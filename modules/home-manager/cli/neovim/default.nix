@@ -1,7 +1,6 @@
 { lib, pkgs, config, ... }:
 with lib;
 let
-  cfg = config.modules.cli.neovim;
   nvim-spell-fr-utf8-dictionary = builtins.fetchurl {
     url = "https://ftp.nluug.nl/vim/runtime/spell/fr.utf-8.spl";
     sha256 = "abfb9702b98d887c175ace58f1ab39733dc08d03b674d914f56344ef86e63b61";
@@ -24,7 +23,7 @@ in
   options.modules.cli.neovim = {
     enable = mkEnableOption "enable Neovim text editor";
   };
-  config = mkIf cfg.enable {
+  config = {
     home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
     home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
     home.file."${config.xdg.configHome}/nvim/lsp/yaml.lua".source = ./files/lsp/yaml.lua;
@@ -68,17 +67,7 @@ in
           {
             plugin = conform-nvim;
             type = "lua";
-            #config = (builtins.readFile ./files/plugins/conform.lua);
-          }
-          {
-            plugin = fzf-lua;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/fzf-lua.lua);
-          }
-          {
-            plugin = gitsigns-nvim;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/luasnip.lua);
+            config = (builtins.readFile ./files/plugins/conform.lua);
           }
           {
             plugin = lualine-nvim;
@@ -94,11 +83,6 @@ in
             plugin = nvim-lint;
             type = "lua";
             #config = ( builtins.readFile ./files/plugins/nvim-lint.lua);
-          }
-          {
-            plugin = nvim-sops;
-            type = "lua";
-            #config = (builtins.readFile ./files/plugins/nvim-sops.lua);
           }
           {
             plugin = (nvim-treesitter.withPlugins (p: [
@@ -124,10 +108,26 @@ in
             plugin = nvim-treesitter-context;
             type = "lua";
             #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
+         }
+        #  { 
+        #   plugin = telescope-cc;
+        #   type = "lua";
+        # }
 
-          }
+        #  { 
+        #    plugin = vim-better-whitespace;
+        #    type = "lua";
+        # }
+        # { 
+        #    plugin = schemastore;
+        #   type = "lua";
+        # }
+        #  { 
+        #    plugin = vim-fugitive;
+        #    type = "lua";
+	# }
+
         ];
     };
   };
 }
-
