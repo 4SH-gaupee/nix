@@ -64,6 +64,8 @@ in
         + (builtins.readFile ./files/lsp.lua)
       ;
       plugins = with pkgs.vimPlugins; [
+      	  { plugin = telescope-fzf-native-nvim;
+	  }
           {
             plugin = conform-nvim;
             type = "lua";
