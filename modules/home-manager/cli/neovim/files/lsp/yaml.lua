@@ -5,7 +5,7 @@ local lefthook = "https://raw.githubusercontent.com/evilmartians/lefthook/refs/h
 local github_workflow = "https://json.schemastore.org/github-workflow.json"
 local github_action = "http://json.schemastore.org/github-action"
 local kustomization = "http://json.schemastore.org/kustomization"
-local ansible = "http://json.schemastore.org/ansible-stable-2.9"
+local ansible = "https://raw.githubusercontent.com/ansible/ansible-lint/refs/heads/main/src/ansiblelint/schemas/ansible.json"
 local ansible_playbook = "http://json.schemastore.org/ansible-playbook"
 local docker_compose = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"
 return {
