@@ -69,6 +69,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -95,6 +96,12 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -156,6 +163,7 @@
   programs.ssh.startAgent = true;
   programs.kdeconnect.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.waydroid.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
