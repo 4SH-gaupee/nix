@@ -1,4 +1,4 @@
-require("tokyonight-moon").setup {
+require("tokyonight").setup {
   integrations = {
     neotree = true
   }
