@@ -1,19 +1,9 @@
 require("conform").setup({
-  -- Format on save configuration
-  format_on_save = function(bufnr)
-    -- Disable format on save for specific filetypes
-    local disable_filetypes = { c = true, cpp = true }
-    local lsp_format
-    if disable_filetypes[vim.bo[bufnr].filetype] then
-      lsp_format = "never"
-    else
-      lsp_format = "fallback"
-    end
-    return {
-      timeout_ms = 500,
-      lsp_format = lsp_format,
-    }
-  end,
+    format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "never",
+  },
 
   -- Formatter configuration by filetype
   formatters_by_ft = {
@@ -23,6 +13,8 @@ require("conform").setup({
     hcl = { "hclfmt" },
     yaml = { "prettierd" },
     markdown = { "prettierd" },
+    sh = { "shfmt" },
+    ["_"] = { "trim_whitespace" },
     -- python = { "isort", "black" },
     -- javascript = { { "prettierd", "prettier" } },
   },

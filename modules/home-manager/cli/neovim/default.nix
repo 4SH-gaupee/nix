@@ -36,6 +36,7 @@ in
       withPython3 = true;
       extraPackages = with pkgs; [
         # LSP Servers
+        ansible-language-server
         clang-tools
         hadolint
         helm-ls
@@ -45,18 +46,16 @@ in
         nodePackages.bash-language-server
         python3Packages.python-lsp-server
         shellcheck
-
         terraform-lsp
         tflint
         yaml-language-server
-        ansible-language-server
 
         # Formatters
-        nixfmt-rfc-style
         hclfmt
-        xmlformat
-        shfmt
+        nixfmt-rfc-style
         prettierd
+        shfmt
+        xmlformat
       ];
       extraLuaConfig =
         (builtins.readFile ./files/options.lua)
@@ -64,6 +63,12 @@ in
         + (builtins.readFile ./files/lsp.lua)
       ;
       plugins = with pkgs.vimPlugins; [
+          {
+            plugin = tokyonight-nvim;
+            type = "lua";
+            config = (builtins.readFile ./files/plugins/theme.lua);
+          }
+
       	  { plugin = telescope-fzf-native-nvim;
 	  }
           {

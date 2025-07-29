@@ -18,6 +18,9 @@
     networkmanager-openvpn
     qpwgraph
     vault
+    trivy
+    bitwarden-cli
+    buildpack
     prusa-slicer
     govc
     mongodb-compass
