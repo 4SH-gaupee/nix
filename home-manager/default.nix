@@ -45,6 +45,7 @@
     jq # A lightweight and flexible command-line JSON processor
     k9s
     kdePackages.ksshaskpass
+    kdePackages.xdg-desktop-portal-kde
     kubectl
     kubeswitch
     lm_sensors # for `sensors` command
@@ -109,7 +110,7 @@
 
 
   ###   HYPRLAND
-  
+
   #  programs.walker = {
   #  enable = true;
   #  runAsService = true;

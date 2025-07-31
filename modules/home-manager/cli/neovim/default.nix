@@ -109,27 +109,27 @@ in
               ])
             );
             type = "lua";
-            #config = ( builtins.readFile ./files/plugins/treesitter.lua);
+            config = ( builtins.readFile ./files/plugins/treesitter.lua);
           }
           {
             plugin = nvim-treesitter-context;
             type = "lua";
             #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
          }
-        #  { 
+        #  {
         #   plugin = telescope-cc;
         #   type = "lua";
         # }
 
-        #  { 
+        #  {
         #    plugin = vim-better-whitespace;
         #    type = "lua";
         # }
-        # { 
+        # {
         #    plugin = schemastore;
         #   type = "lua";
         # }
-        #  { 
+        #  {
         #    plugin = vim-fugitive;
         #    type = "lua";
 	# }
