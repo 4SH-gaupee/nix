@@ -15,7 +15,7 @@ return {
   settings = {
     yaml = {
       schemas = {
-        [kubernetes] = {
+        kubernetes = {
           "/*.yaml",
         },
         [ansible] = {

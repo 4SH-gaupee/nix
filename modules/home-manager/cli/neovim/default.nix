@@ -81,11 +81,11 @@ in
             type = "lua";
             #config = (builtins.readFile ./files/plugins/lualine.lua);
           }
-          {
-           plugin = neo-tree-nvim;
-           type = "lua";
-           #config = (builtins.readFile ./files/plugins/neotree.lua);
-          }
+       #   {
+       #    plugin = neo-tree-nvim;
+       #    type = "lua";
+       #    #config = (builtins.readFile ./files/plugins/neotree.lua);
+       #   }
           {
             plugin = nvim-lint;
             type = "lua";
