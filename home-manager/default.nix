@@ -11,6 +11,7 @@
     (python313.withPackages (ps: [ ps.hvac ps.diagrams ]))
     minikube
     qbittorrent
+    foot
     gh
     ghq
     kubectx
