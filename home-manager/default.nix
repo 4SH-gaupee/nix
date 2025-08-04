@@ -90,6 +90,7 @@
     shellAliases = {
       nixedit = "nvim ~/.config/nixos";
       nixup   = "nixos-rebuild switch --sudo --flake ~/.config/nixos";
+      nixtest   = "nixos-rebuild test --sudo --flake ~/.config/nixos";
       s = "switch";
       tgp = "terragrunt plan";
       tgpa = "terragrunt plan --all";
