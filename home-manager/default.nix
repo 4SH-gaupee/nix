@@ -100,7 +100,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "terraform" "ansible" "tmux" "kube-ps1"];
+      plugins = [ "git" "docker" "terraform" "ansible" "tmux" "kube-ps1" "direnv"];
       theme = "ys";
     };
     initExtra = ''

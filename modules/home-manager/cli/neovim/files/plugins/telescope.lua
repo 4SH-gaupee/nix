@@ -3,7 +3,7 @@ require("telescope").setup({
   defaults = {
     mappings = {
       i = {
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
       },
       n = {
         ["q"] = actions.smart_send_to_qflist + actions.open_qflist,
