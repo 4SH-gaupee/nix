@@ -71,6 +71,8 @@ in
 
       	  { plugin = telescope-fzf-native-nvim;
 	  }
+      	  { plugin = nvim-lspconfig;
+	  }
           {
             plugin = conform-nvim;
             type = "lua";
