@@ -6,7 +6,7 @@
     server.enable = false; # optional, if you want foot in client mode
     settings = {
       main = {
-        font = "Hack:size=11";  # Font setting
+        font = "Hack:size=10";  # Font setting
         dpi-aware = "yes";
         selection-target = "both";
       };
