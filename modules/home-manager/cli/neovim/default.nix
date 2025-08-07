@@ -123,10 +123,10 @@ in
         #   type = "lua";
         # }
 
-        #  {
-        #    plugin = vim-better-whitespace;
-        #    type = "lua";
-        # }
+         {
+            plugin = vim-better-whitespace;
+            type = "lua";
+         }
         # {
         #    plugin = schemastore;
         #   type = "lua";
