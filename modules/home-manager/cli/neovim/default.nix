@@ -18,6 +18,16 @@ let
       ref = "main";
     };
   };
+  telescope-cc = pkgs.vimUtils.buildVimPlugin {
+    pname = "telescope-cc.nvim";
+    version = "main";
+    src = builtins.fetchGit {
+      url = "https://github.com/olacin/telescope-cc.nvim.git";
+      # Pin to a commit for reproducibility
+      rev = "c3cf3489178f945e3efdf0bd15bfb8c353279755";
+      ref = "main";
+    };
+  };
 in
 {
   options.modules.cli.neovim = {
@@ -118,10 +128,10 @@ in
             type = "lua";
             #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
          }
-        #  {
-        #   plugin = telescope-cc;
-        #   type = "lua";
-        # }
+         {
+           plugin = telescope-cc;
+           type = "lua";
+         }
 
          {
             plugin = vim-better-whitespace;
