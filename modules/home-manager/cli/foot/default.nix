@@ -11,7 +11,7 @@
         selection-target = "both";
       };
       colors = {
-        alpha = 0.8;  # Transparency setting
+        alpha = 0.95;  # Transparency setting
       };
       bell = {
       	system = false;
