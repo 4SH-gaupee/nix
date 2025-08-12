@@ -91,7 +91,7 @@ in
           {
             plugin = lualine-nvim;
             type = "lua";
-            #config = (builtins.readFile ./files/plugins/lualine.lua);
+            config = (builtins.readFile ./files/plugins/lualine.lua);
           }
        #   {
        #    plugin = neo-tree-nvim;
