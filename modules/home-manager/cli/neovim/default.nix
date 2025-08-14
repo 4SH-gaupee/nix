@@ -141,10 +141,15 @@ in
         #    plugin = schemastore;
         #   type = "lua";
         # }
-        #  {
-        #    plugin = vim-fugitive;
-        #    type = "lua";
-	# }
+         {
+            plugin = vim-fugitive;
+            type = "lua";
+	 }
+        {
+          plugin = blink-cmp;
+          type = "lua";
+          config = (builtins.readFile ./files/plugins/blink-cmp.lua);
+        }
 
         ];
     };
