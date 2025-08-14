@@ -16,10 +16,25 @@
   };
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.fancontrol.enable = true;
+  hardware.fancontrol.config = ''
+    INTERVAL=10
+    DEVPATH=hwmon5=devices/platform/PNP0C14:06/wmi_bus/wmi_bus-PNP0C14:06/F1DDEE52-063C-4784-A11E-8A06684B9B01 hwmon7=devices/platform/coretemp.0
+    DEVNAME=hwmon5=dell_smm hwmon7=coretemp
+    FCTEMPS=hwmon5/pwm1=hwmon7/temp1_input hwmon5/pwm2=hwmon7/temp1_input
+    FCFANS=hwmon5/pwm1=hwmon5/fan1_input hwmon5/pwm2=hwmon5/fan2_input
+    MINTEMP=hwmon5/pwm1=20 hwmon5/pwm2=30
+    MAXTEMP=hwmon5/pwm1=100 hwmon5/pwm2=100
+    MINSTART=hwmon5/pwm1=100 hwmon5/pwm2=100
+    MINSTOP=hwmon5/pwm1=150 hwmon5/pwm2=150
+    MINPWM=hwmon5/pwm1=150 hwmon5/pwm2=150
+    MAXPWM=hwmon5/pwm1=255 hwmon5/pwm2=255
+    AVERAGE=hwmon5/pwm1=1 hwmon5/pwm2=1
+  '';
 
  # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "displaylink" "modesetting" "nvidia"];
-
+  programs.steam.enable = true;
   hardware.nvidia = {
 
     # Modesetting is required.
@@ -138,7 +153,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.firefox.enable = true;
   programs.zsh.enable = true;
-
   users.users.gaupee = {
     shell = pkgs.zsh;
     description = "gaupee";
