@@ -150,6 +150,9 @@ in
           type = "lua";
           config = (builtins.readFile ./files/plugins/blink-cmp.lua);
         }
+        blink-emoji-nvim
+        blink-cmp-dictionary
+
 
         ];
     };
