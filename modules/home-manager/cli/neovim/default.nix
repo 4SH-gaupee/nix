@@ -28,6 +28,16 @@ let
       ref = "main";
     };
   };
+  kustomize = pkgs.vimUtils.buildVimPlugin {
+    pname = "kustomize.nvim";
+    buildInputs = [ pkgs.vimPlugins.luasnip pkgs.vimPlugins.plenary-nvim] ;
+    version = "main";
+    src = builtins.fetchGit {
+      url = "https://github.com/Allaman/kustomize.nvim";
+      ref = "refs/tags/v6.0.0";
+      rev = "0359d57bbd842b3ab9957d927f1bcd0558f55903";
+    };
+  };
 in
 {
   options.modules.cli.neovim = {
@@ -137,10 +147,10 @@ in
             plugin = vim-better-whitespace;
             type = "lua";
          }
-        # {
-        #    plugin = schemastore;
-        #   type = "lua";
-        # }
+         {
+            plugin = SchemaStore-nvim;
+           type = "lua";
+         }
          {
             plugin = vim-fugitive;
             type = "lua";
@@ -150,10 +160,12 @@ in
           type = "lua";
           config = (builtins.readFile ./files/plugins/blink-cmp.lua);
         }
+         {
+           plugin = kustomize;
+           type = "lua";
+         }
         blink-emoji-nvim
         blink-cmp-dictionary
-
-
         ];
     };
   };

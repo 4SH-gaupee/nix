@@ -13,44 +13,15 @@ return {
   filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
   root_markers = { '.git' },
   settings = {
-    yaml = {
-      schemas = {
-        kubernetes = {
-          "/*.yaml",
-        },
-        [ansible] = {
-          "roles/*.{yml,yaml}",
-        },
-        [kustomization] = {
-          "**/kustomization.{yml,yaml}",
-        },
-        [ansible_playbook] = {
-          "*play*.{yml,yaml}",
-        },
-        [docker_compose] = {
-          "*docker-compose*.{yml,yaml}",
-        },
-        [gitlab_ci] = {
-          "ci/*.{yaml,yml}",
-          ".gitlab/**/*.{yaml,yml}",
-          ".gitlab-ci.{yaml,yml}",
-        },
-        [taskfile] = {
-          "Taskfile*.{yaml,yml}",
-          "taskfile*.{yaml,yml}",
-          "taskfiles/**/*.{yaml,yml}",
-        },
-        [lefthook] = {
-          "lefthook.{yaml,yml}",
-        },
-        [github_workflow] = {
-          ".github/workflow/**/*.{yaml,yml}",
-        },
-        [github_action] = {
-          ".github/action.{yaml,yml}",
-        }
-
+		yaml = {
+      schemaStore = {
+        -- You must disable built-in schemaStore support if you want to use
+        -- this plugin and its advanced options like `ignore`.
+        enable = false,
+        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+        url = "",
       },
+      schemas = require('schemastore').yaml.schemas(),
     },
   },
 }

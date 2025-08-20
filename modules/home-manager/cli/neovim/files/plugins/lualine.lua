@@ -1,11 +1,3 @@
-local function get_schema()
-  local schema = require("yaml-companion").get_buf_schema(0)
-  if schema.result[1].name == "none" then
-    return ""
-  end
-  return schema.result[1].name
-end
-
 require('lualine').setup {
     options = {
         icons_enabled = true,
@@ -25,7 +17,7 @@ require('lualine').setup {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename'},
-        lualine_x = {'encoding', 'fileformat', 'filetype', get_schema},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },
