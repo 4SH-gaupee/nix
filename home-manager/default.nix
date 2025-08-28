@@ -98,6 +98,14 @@
       PROMPT='$(kube_ps1)'$PROMPT
       source <(switcher init zsh)
       source <(switch completion zsh)
+      p() {
+      	local dir=$(ghq list -p | fzf)
+      	if [[ -n "$dir" && -d "$dir" ]]; then
+      	  cd "$dir"
+      	else
+      	  echo "No directory selected or directory does not exist"
+      	fi
+      }
     '';
   };
 
