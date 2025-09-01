@@ -166,6 +166,11 @@ in
          }
         blink-emoji-nvim
         blink-cmp-dictionary
+        {
+          plugin = nvim-lint;
+          type = "lua";
+          config = (builtins.readFile ./files/plugins/lint.lua);
+        }
         ];
     };
   };
