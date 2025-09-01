@@ -54,6 +54,7 @@
     talosctl
     terraform
     terragrunt
+    yamllint
     tmux
     tree
     trivy

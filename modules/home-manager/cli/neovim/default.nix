@@ -141,6 +141,7 @@ in
          {
            plugin = telescope-cc;
            type = "lua";
+           config = ( builtins.readFile ./files/plugins/telescope.lua);
          }
 
          {
