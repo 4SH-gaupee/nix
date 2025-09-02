@@ -10,22 +10,6 @@ let
     sha256 = "0294bc32b42c90bbb286a89e23ca3773b7ef50eff1ab523b1513d6a25c6b3f58";
   };
 
-  ## Dynamically create LSP servers configurations list regarding
-  ## files in `./files/lsp`
-  lspConfigFiles = lib.mapAttrs' (
-    k: _:  lib.nameValuePair
-      ("${config.xdg.configHome}/nvim/lsp/${k}")
-      ({ source = ./files/lsp/${k};})
-    ) (builtins.readDir ./files/lsp);
-
-  ## This variable contains neovim LSP activations
-  lspLuaConfig = lib.attrsets.mapAttrsToList (
-    k: v:
-      "vim.lsp.enable('${lib.removeSuffix ".lua" k}')"
-  ) (builtins.readDir ./files/lsp);
-
-
-
   nvim-k8s-lsp = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-k8s-lsp";
     version = "main";
@@ -55,17 +39,30 @@ let
       rev = "0359d57bbd842b3ab9957d927f1bcd0558f55903";
     };
   };
+
+  ## Dynamically create LSP servers configurations list regarding
+  ## files in `./files/lsp`
+  lspConfigFiles = lib.mapAttrs' (
+    k: _:  lib.nameValuePair
+      ("${config.xdg.configHome}/nvim/lsp/${k}")
+      ({ source = ./files/lsp/${k};})
+    ) (builtins.readDir ./files/lsp);
+
+  ## This variable contains neovim LSP activations
+  lspLuaConfig = lib.attrsets.mapAttrsToList (
+    k: v:
+      "vim.lsp.enable('${lib.removeSuffix ".lua" k}')"
+  ) (builtins.readDir ./files/lsp);
 in
 {
   options.modules.cli.neovim = {
     enable = mkEnableOption "enable Neovim text editor";
   };
   config = {
-    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
-    home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
-    home.file."${config.xdg.configHome}/nvim/lsp/yaml.lua".source = ./files/lsp/yaml.lua;
-    home.file."${config.xdg.configHome}/nvim/lsp/ansible.lua".source = ./files/lsp/ansible.lua;
-
+    home.file = lspConfigFiles // {
+    "${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
+    "${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
+    };
     programs.neovim = {
       enable = true;
       defaultEditor = true;
@@ -98,7 +95,10 @@ in
       extraLuaConfig =
         (builtins.readFile ./files/options.lua)
         + (builtins.readFile ./files/keymaps.lua)
-        + (builtins.readFile ./files/lsp.lua)
+	+ ''
+          ${ lib.concatStringsSep "\n" lspLuaConfig}
+        ''
+
       ;
       plugins = with pkgs.vimPlugins; [
           {

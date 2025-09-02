@@ -120,7 +120,7 @@ require("blink.cmp").setup({
       snippets = {
         name = "Snippets",
         module = "blink.cmp.sources.snippets",
-        score_offset = 10,
+        score_offset = 60,
       },
       lsp = {
         name = "LSP",

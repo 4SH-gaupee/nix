@@ -6,6 +6,6 @@
 --vim.lsp.enable('pylsp')
 --vim.lsp.enable('terraformls')
 --vim.lsp.enable('tflint')
-vim.lsp.enable('yamlls')
-vim.lsp.enable('ansiblels')
+vim.lsp.enable('yaml')
+vim.lsp.enable('ansible')
 
