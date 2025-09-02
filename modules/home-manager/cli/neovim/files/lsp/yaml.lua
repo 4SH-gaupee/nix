@@ -1,7 +1,5 @@
 -- most used yaml schemas
 local kustomization = "http://json.schemastore.org/kustomization"
-local ansible = "https://raw.githubusercontent.com/ansible/ansible-lint/refs/heads/main/src/ansiblelint/schemas/ansible.json"
-local ansible_playbook = "http://json.schemastore.org/ansible-playbook"
 local docker_compose = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"
 local kubernetes = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.2/all.json"
 return {
@@ -19,8 +17,6 @@ return {
       },
 			schemas = {
         [kustomization] = "kustomization.{yml,yaml}",
-        [ansible] = "ansible.{yml,yaml}",
-        [ansible_playbook] = "playbook.{yml,yaml}",
         [docker_compose] = "docker-compose.{yml,yaml}",
         [kubernetes] = "*.yaml", -- This line enables Kubernetes validation for all .yaml files
       },

@@ -10,31 +10,19 @@ require("blink.cmp").setup({
     ['<C-e>'] = { 'cancel' },
 
   },
-  completion = {
-    menu = {
-      draw = {
-        components = {
-          label = {
-            width = { fill = true, max = 60, },
+		completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 0,
+        },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = true,
           },
         },
-        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
       },
-    },
-    documentation = { auto_show = true },
-    list = {
-      max_items = 30;
-      selection = {
-        preselect = false,
-        auto_insert = true,
-      },
-      cycle = {
-        from_bottom = true,
-        from_top = true,
-      },
-    },
-  },
-  sources = {
+	sources = {
     default = {
       "lsp",
       "path",
@@ -77,20 +65,74 @@ require("blink.cmp").setup({
           end,
         },
       },
-      buffer = {
-        module = 'blink.cmp.sources.buffer',
-        score_offset = -3,
-        min_keyword_length = 4,
+			buffer = {
+            name = "Buffer",
+            module = "blink.cmp.sources.buffer",
+            opts = {
+              get_bufnrs = function()
+                return vim.tbl_filter(function(bufnr)
+                  return vim.bo[bufnr].buftype == ""
+                end, vim.api.nvim_list_bufs())
+              end,
+            },
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.labelDetails = {
+                  description = "(buf)",
+                }
+              end
+              return items
+            end,
+          },
+      orgmode = {
+        name = 'Orgmode',
+        module = 'orgmode.org.autocompletion.blink',
+        fallbacks = { 'buffer' },
+      },
+      ripgrep = {
+        enabled = function()
+          -- disable for the sm repo. Its just too big for ripgrep
+          local git_cmd = vim.fn.system("git rev-parse --show-toplevel | tr -d '\n'")
+          return not string.find(git_cmd, "dev/sm")
+        end,
+        module = "blink-ripgrep",
+        name = "Ripgrep",
         opts = {
-          -- default to all visible buffers
-          get_bufnrs = function()
-            return vim
-              .iter(vim.api.nvim_list_wins())
-              :map(function(win) return vim.api.nvim_win_get_buf(win) end)
-              :filter(function(buf) return vim.bo[buf].buftype ~= 'nofile' end)
-              :totable()
-          end,
-        }
+          project_root_marker = { "Dockerfile", "Jenkinsfile", ".git" },
+          project_root_fallback = false,
+          future_features = {
+            -- Kill previous searches when a new search is started. This is
+            -- useful to save resources and might become the default in the
+            -- future.
+            kill_previous_searches = true,
+          },
+        },
+        transform_items = function(_, items)
+          for _, item in ipairs(items) do
+            item.labelDetails = {
+              description = "(rg)",
+            }
+          end
+          return items
+        end,
+        score_offset = 5,
+      },
+      snippets = {
+        name = "Snippets",
+        module = "blink.cmp.sources.snippets",
+        score_offset = 10,
+      },
+      lsp = {
+        name = "LSP",
+        module = "blink.cmp.sources.lsp",
+        score_offset = 50,
+      },
+
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        -- make lazydev completions top priority (see `:h blink.cmp`)
+        score_offset = 100,
       },
     },
   },

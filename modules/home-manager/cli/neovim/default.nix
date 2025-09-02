@@ -64,6 +64,7 @@ in
     home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.spl".source = nvim-spell-fr-utf8-dictionary;
     home.file."${config.xdg.configHome}/nvim/spell/fr.utf-8.sug".source = nvim-spell-fr-utf8-suggestions;
     home.file."${config.xdg.configHome}/nvim/lsp/yaml.lua".source = ./files/lsp/yaml.lua;
+    home.file."${config.xdg.configHome}/nvim/lsp/ansible.lua".source = ./files/lsp/ansible.lua;
 
     programs.neovim = {
       enable = true;
