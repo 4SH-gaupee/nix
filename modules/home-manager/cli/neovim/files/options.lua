@@ -36,7 +36,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 8
 -- disable lsplog
 -- This is not usefull on a daily basis and should positively impact performance
-vim.lsp.set_log_level("off")
+--vim.lsp.set_log_level("off")
 
 
 vim.filetype.add({
