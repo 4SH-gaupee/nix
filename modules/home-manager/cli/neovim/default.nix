@@ -9,6 +9,23 @@ let
     url = "https://ftp.nluug.nl/vim/runtime/spell/fr.utf-8.sug";
     sha256 = "0294bc32b42c90bbb286a89e23ca3773b7ef50eff1ab523b1513d6a25c6b3f58";
   };
+
+  ## Dynamically create LSP servers configurations list regarding
+  ## files in `./files/lsp`
+  lspConfigFiles = lib.mapAttrs' (
+    k: _:  lib.nameValuePair
+      ("${config.xdg.configHome}/nvim/lsp/${k}")
+      ({ source = ./files/lsp/${k};})
+    ) (builtins.readDir ./files/lsp);
+
+  ## This variable contains neovim LSP activations
+  lspLuaConfig = lib.attrsets.mapAttrsToList (
+    k: v:
+      "vim.lsp.enable('${lib.removeSuffix ".lua" k}')"
+  ) (builtins.readDir ./files/lsp);
+
+
+
   nvim-k8s-lsp = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-k8s-lsp";
     version = "main";

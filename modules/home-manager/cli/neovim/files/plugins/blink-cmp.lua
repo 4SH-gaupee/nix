@@ -95,7 +95,7 @@ require("blink.cmp").setup({
     },
   },
   fuzzy = {
-    max_typos = function() return 0 end,
+    implementation = "prefer_rust_with_warning"
   },
   cmdline = {
     enabled = false,
