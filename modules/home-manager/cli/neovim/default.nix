@@ -185,6 +185,7 @@ in
          }
         blink-emoji-nvim
         blink-cmp-dictionary
+	lazydev-nvim
         {
           plugin = nvim-lint;
           type = "lua";

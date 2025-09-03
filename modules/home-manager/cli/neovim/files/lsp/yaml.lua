@@ -1,26 +1,34 @@
 -- most used yaml schemas
-local kustomization = "http://json.schemastore.org/kustomization"
-local docker_compose = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"
-local kubernetes = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.2/all.json"
+local gitlab_ci = "https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"
+local taskfile = "https://taskfile.dev/schema.json"
+local lefthook = "https://raw.githubusercontent.com/evilmartians/lefthook/refs/heads/master/schema.json"
+local github_workflow = "https://json.schemastore.org/github-workflow.json"
+
 return {
   cmd = { 'yaml-language-server', '--stdio' },
   filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
   root_markers = { '.git' },
   settings = {
-		yaml = {
-      schemaStore = {
-        -- You must disable built-in schemaStore support if you want to use
-        -- this plugin and its advanced options like `ignore`.
-        enable = false,
-        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-        url = "",
+    yaml = {
+      schemas = {
+        [gitlab_ci] = {
+          "ci/*.{yaml,yml}",
+          ".gitlab/**/*.{yaml,yml}",
+          ".gitlab-ci.{yaml,yml}",
+        },
+        [taskfile] = {
+          "Taskfile*.{yaml,yml}",
+          "taskfile*.{yaml,yml}",
+          "taskfiles/**/*.{yaml,yml}",
+        },
+        [lefthook] = {
+          "lefthook.{yaml,yml}",
+        },
+        [github_workflow] = {
+          ".github/workflow/**/*.{yaml,yml}",
+        }
       },
-			schemas = {
-        [kustomization] = "kustomization.{yml,yaml}",
-        [docker_compose] = "docker-compose.{yml,yaml}",
-        [kubernetes] = "*.yaml", -- This line enables Kubernetes validation for all .yaml files
-      },
-		},
+    },
   },
 }
 

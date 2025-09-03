@@ -1,26 +1,25 @@
 return {
-  cmd = { "ansible-language-server", "--stdio" },
-  filetypes = { "yaml.ansible" },
-	root_markers = { '.git' },
+  cmd = { 'ansible-language-server', '--stdio' },
   settings = {
     ansible = {
       python = {
-        interpreterPath = vim.fn.exepath("python3"), -- safer than "python"
+        interpreterPath = 'python',
       },
       ansible = {
-        useFullyQualifiedCollectionNames = true,
+        path = 'ansible',
+      },
+      executionEnvironment = {
+        enabled = false,
       },
       validation = {
+        enabled = true,
         lint = {
           enabled = true,
-          arguments = "-x role-name,package-latest,fqcn-builtins",
+          path = 'ansible-lint',
         },
-      },
-			completion = {
-        provideRedirectModules = true,
-        provideModuleOptionAliases = true,
       },
     },
   },
+  filetypes = { 'yaml.ansible' },
+  root_markers = { 'ansible.cfg', '.ansible-lint' },
 }
-
