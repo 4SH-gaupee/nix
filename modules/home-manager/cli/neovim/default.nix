@@ -10,15 +10,6 @@ let
     sha256 = "0294bc32b42c90bbb286a89e23ca3773b7ef50eff1ab523b1513d6a25c6b3f58";
   };
 
-  nvim-k8s-lsp = pkgs.vimUtils.buildVimPlugin {
-    pname = "nvim-k8s-lsp";
-    version = "main";
-    src = builtins.fetchGit {
-      url = "https://github.com/tonychg/nvim-k8s-lsp.git";
-      rev = "395f6d6b91da55c12b26a2ef1ace7a922a756712";
-      ref = "main";
-    };
-  };
   telescope-cc = pkgs.vimUtils.buildVimPlugin {
     pname = "telescope-cc.nvim";
     version = "main";
@@ -37,6 +28,16 @@ let
       url = "https://github.com/Allaman/kustomize.nvim";
       ref = "refs/tags/v6.0.0";
       rev = "0359d57bbd842b3ab9957d927f1bcd0558f55903";
+    };
+  };
+
+  nvim-k8s-lsp = pkgs.vimUtils.buildVimPlugin {
+    pname = "nvim-k8s-lsp";
+    version = "main";
+    src = builtins.fetchGit {
+      url = "https://github.com/tonychg/nvim-k8s-lsp.git";
+      rev = "1dffda65f4fe117f67514ed5d93b18f62be1ef24";
+      ref = "main";
     };
   };
 
@@ -72,24 +73,11 @@ in
       extraPackages = with pkgs; [
         # LSP Servers
         ansible-language-server
-        clang-tools
-        hadolint
-        helm-ls
         lua-language-server
-        marksman
-        nil
-        nodePackages.bash-language-server
         python3Packages.python-lsp-server
-        shellcheck
-        terraform-lsp
-        tflint
         yaml-language-server
 
-        # Formatters
-        hclfmt
-        nixfmt-rfc-style
         prettierd
-        shfmt
         xmlformat
       ];
       extraLuaConfig =
@@ -101,6 +89,10 @@ in
 
       ;
       plugins = with pkgs.vimPlugins; [
+        SchemaStore-nvim
+        blink-emoji-nvim
+        blink-cmp-dictionary
+	lazydev-nvim
           {
             plugin = tokyonight-nvim;
             type = "lua";
@@ -108,8 +100,6 @@ in
           }
 
       	  { plugin = telescope-fzf-native-nvim;
-	  }
-      	  { plugin = nvim-lspconfig;
 	  }
           {
             plugin = conform-nvim;
@@ -121,16 +111,6 @@ in
             type = "lua";
             config = (builtins.readFile ./files/plugins/lualine.lua);
           }
-       #   {
-       #    plugin = neo-tree-nvim;
-       #    type = "lua";
-       #    #config = (builtins.readFile ./files/plugins/neotree.lua);
-       #   }
-          {
-            plugin = nvim-lint;
-            type = "lua";
-            #config = ( builtins.readFile ./files/plugins/nvim-lint.lua);
-          }
           {
             plugin = (nvim-treesitter.withPlugins (p: [
                 p.bash
@@ -138,7 +118,6 @@ in
                 p.hcl
                 p.helm
                 p.lua
-                p.llvm
                 p.markdown
                 p.markdown_inline
                 p.nix
@@ -151,24 +130,14 @@ in
             type = "lua";
             config = ( builtins.readFile ./files/plugins/treesitter.lua);
           }
-          {
-            plugin = nvim-treesitter-context;
-            type = "lua";
-            #config = ( builtins.readFile ./files/plugins/treesitter_context.lua);
-         }
          {
            plugin = telescope-cc;
            type = "lua";
            config = ( builtins.readFile ./files/plugins/telescope.lua);
          }
-
          {
             plugin = vim-better-whitespace;
             type = "lua";
-         }
-         {
-            plugin = SchemaStore-nvim;
-           type = "lua";
          }
          {
             plugin = vim-fugitive;
@@ -183,13 +152,15 @@ in
            plugin = kustomize;
            type = "lua";
          }
-        blink-emoji-nvim
-        blink-cmp-dictionary
-	lazydev-nvim
         {
           plugin = nvim-lint;
           type = "lua";
           config = (builtins.readFile ./files/plugins/lint.lua);
+        }
+	{
+          plugin = nvim-k8s-lsp ;
+          type = "lua";
+          config = ( builtins.readFile ./files/plugins/nvim-k8s-lsp.lua );
         }
         ];
     };

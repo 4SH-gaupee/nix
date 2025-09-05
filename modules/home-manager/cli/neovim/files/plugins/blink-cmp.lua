@@ -29,6 +29,29 @@ require("blink.cmp").setup({
         module = "lazydev.integrations.blink",
         score_offset = 100,
       },
+      emoji = {
+        module = "blink-emoji",
+        name = "Emoji",
+        score_offset = 15, -- Tune by preference
+        opts = { insert = true }, -- Insert emoji (default) or complete its name
+        should_show_items = function()
+          return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
+        end,
+      },
+      dictionary = {
+        module = "blink-cmp-dictionary",
+        name = "Dict",
+        min_keyword_length = 3,
+        max_items = 10,
+        opts = {
+          dictionary_files = function()
+            if vim.bo.filetype == "markdown" or vim.bo.filetype == "gitcommit" then
+              return {}
+            end
+            return {}
+          end,
+        },
+      },
     },
   },
   fuzzy = { implementation = "prefer_rust_with_warning" },
