@@ -4,6 +4,12 @@ return {
   root_markers = { '.git' },
   settings = {
   	yaml = {
+			format = {
+          enable = false, -- use prettier instead
+      },
+      completion = true,
+      hover = true,
+      validate = true,
       schemaStore = {
         -- You must disable built-in schemaStore support if you want to use
         -- this plugin and its advanced options like `ignore`.
