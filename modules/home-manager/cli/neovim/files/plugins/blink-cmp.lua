@@ -11,16 +11,38 @@ require("blink.cmp").setup({
 
   },
   completion = {
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 500,
-      },
-      accept = {
-        auto_brackets = {
-          enabled = true,
+    menu = {
+      draw = {
+        components = {
+          label = {
+            width = { fill = true, max = 60, },
+          },
         },
+        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
       },
     },
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 200,
+    },
+    accept = {
+      auto_brackets = {
+        enabled = true,
+      },
+    },
+  },
+  list = {
+    max_items = 30;
+    selection = {
+      preselect = false,
+      auto_insert = true,
+    },
+    cycle = {
+      from_bottom = true,
+      from_top = true,
+    },
+  },
+
   sources = {
     default = { "lazydev", "lsp", "buffer", "snippets", "path", "omni" },
     providers = {
@@ -58,6 +80,37 @@ require("blink.cmp").setup({
 
   cmdline = {
     enabled = false,
+  },
+  appearance = {
+    nerd_font_variant = "normal",
+    kind_icons = {
+      Text = "",
+      Method = "󰆧",
+      Function = "󰊕",
+      Constructor = "",
+      Field = "󰇽",
+      Variable = "󰂡",
+      Class = "󰠱",
+      Interface = "",
+      Module = "",
+      Property = "󰜢",
+      Unit = "",
+      Value = "󰎠",
+      Enum = "",
+      Keyword = "󰌋",
+      Snippet = "",
+      Color = "󰏘",
+      File = "󰈙",
+      Reference = "",
+      Folder = "󰉋",
+      EnumMember = "",
+      Constant = "󰏿",
+      Struct = "",
+      Event = "",
+      Operator = "󰆕",
+      TypeParameter = "󰅲",
+    }
   }
+
 })
 

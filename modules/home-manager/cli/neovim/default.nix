@@ -76,6 +76,11 @@ in
         lua-language-server
         python3Packages.python-lsp-server
         yaml-language-server
+        tofu-ls
+        helm-ls
+        tflint
+        vscode-langservers-extracted
+
 
         prettierd
         xmlformat
