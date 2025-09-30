@@ -72,7 +72,6 @@ in
       withPython3 = true;
       extraPackages = with pkgs; [
         # LSP Servers
-        ansible-language-server
         lua-language-server
         python3Packages.python-lsp-server
         yaml-language-server
