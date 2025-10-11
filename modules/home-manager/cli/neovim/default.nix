@@ -83,6 +83,10 @@ in
 
         prettierd
         xmlformat
+        alejandra
+        shfmt
+        yamlfmt
+
       ];
       extraLuaConfig =
         (builtins.readFile ./files/options.lua)
@@ -97,6 +101,13 @@ in
         blink-emoji-nvim
         blink-cmp-dictionary
 	lazydev-nvim
+        {
+          plugin = nvim-autopairs;
+          type = "lua";
+          config = ''
+            local autopair = require("nvim-autopairs").setup {}
+          '';
+        }
           {
             plugin = tokyonight-nvim;
             type = "lua";

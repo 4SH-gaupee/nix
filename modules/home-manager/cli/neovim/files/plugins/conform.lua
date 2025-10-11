@@ -5,16 +5,27 @@ require("conform").setup({
     lsp_format = "never",
   },
 
+	formatters = {
+    terraform = {
+      inherit = false,
+      command = "tofu",
+      args = { "fmt", "-" },
+      stdin = true,
+    },
+  },
+
   -- Formatter configuration by filetype
   formatters_by_ft = {
-    lua = { "stylua" },
-    xml = { "xmlformat" },
-    json = { "prettierd" },
+    ["_"] = { "trim_whitespace" },
+		nix = { "alejandra"},
+		terraform = { "terraform" },
     hcl = { "hclfmt" },
-    yaml = { "prettierd" },
+    json = { "prettierd" },
+    lua = { "stylua" },
     markdown = { "prettierd" },
     sh = { "shfmt" },
-    ["_"] = { "trim_whitespace" },
+    xml = { "xmlformat" },
+    yaml = { "yamlfmt" },
     -- python = { "isort", "black" },
     -- javascript = { { "prettierd", "prettier" } },
   },
