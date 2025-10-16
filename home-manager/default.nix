@@ -95,7 +95,7 @@
       plugins = [ "git" "docker" "terraform" "ansible" "tmux" "kube-ps1" "direnv"];
       theme = "ys";
     };
-    initExtra = ''
+    initContent = ''
       PROMPT='$(kube_ps1)'$PROMPT
       source <(switcher init zsh)
       source <(switch completion zsh)
