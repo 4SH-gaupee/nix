@@ -19,7 +19,6 @@ require("conform").setup({
     ["_"] = { "trim_whitespace" },
 		nix = { "alejandra"},
 		terraform = { "terraform" },
-    hcl = { "hclfmt" },
     json = { "prettierd" },
     lua = { "stylua" },
     markdown = { "prettierd" },

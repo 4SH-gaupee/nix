@@ -1,17 +1,21 @@
-{ config, pkgs, inputs, ... }:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-   ../modules/home-manager/default.nix
+    ../modules/home-manager/default.nix
   ];
   home.username = "gaupee";
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
-    (python313.withPackages (ps: [ ps.hvac ps.diagrams ]))
+    (python313.withPackages (ps: [ps.hvac ps.diagrams]))
     ansible
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     curl
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
     docker-compose
     ethtool
     foot
@@ -45,6 +49,11 @@
     networkmanager-openvpn
     nix-output-monitor
     oh-my-zsh
+    opentofu
+    stylua
+    kubent
+    kubeconform
+    tree-sitter
     pciutils # lspci
     popeye
     qpwgraph
@@ -65,7 +74,7 @@
     which
     yq-go # yaml processor https://github.com/mikefarah/yq
     zig
- ];
+  ];
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -81,8 +90,8 @@
     history.extended = true;
     shellAliases = {
       nixedit = "nvim ~/.config/nixos";
-      nixup   = "nixos-rebuild switch --sudo --flake ~/.config/nixos";
-      nixtest   = "nixos-rebuild test --sudo --flake ~/.config/nixos";
+      nixup = "nixos-rebuild switch --sudo --flake ~/.config/nixos";
+      nixtest = "nixos-rebuild test --sudo --flake ~/.config/nixos";
       s = "switch";
       tgp = "terragrunt plan";
       tgpa = "terragrunt plan --all";
@@ -92,7 +101,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "terraform" "ansible" "tmux" "kube-ps1" "direnv"];
+      plugins = ["git" "docker" "terraform" "ansible" "tmux" "kube-ps1" "direnv"];
       theme = "ys";
     };
     initContent = ''
