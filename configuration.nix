@@ -1,15 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   #Nvidia stuff
   hardware.graphics = {
     enable = true;
@@ -32,11 +33,10 @@
     AVERAGE=hwmon5/pwm1=1 hwmon5/pwm2=1
   '';
 
- # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "displaylink" "modesetting" "nvidia"];
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["displaylink" "modesetting" "nvidia"];
   programs.steam.enable = true;
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
@@ -58,20 +58,19 @@
     # Only available from driver 515.43.04+
     open = true;
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   hardware.nvidia.prime = {
-	sync.enable = true;
-		# Make sure to use the correct Bus ID values for your system!
-		intelBusId = "PCI:0:2:0";
-		nvidiaBusId = "PCI:1:0:0";
-                # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+    sync.enable = true;
+    # Make sure to use the correct Bus ID values for your system!
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+    # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
   };
-
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -79,12 +78,12 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.hosts = {
-};
+  };
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+  networking.networkmanager.plugins = [pkgs.networkmanager-openvpn];
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -112,12 +111,10 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -142,6 +139,7 @@
       cups-browsed
     ];
   };
+  services.flatpak.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -169,10 +167,10 @@
     shell = pkgs.zsh;
     description = "gaupee";
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -202,5 +200,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

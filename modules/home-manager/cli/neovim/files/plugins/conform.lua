@@ -25,7 +25,7 @@ require("conform").setup({
     markdown = { "prettierd" },
     sh = { "shfmt" },
     xml = { "xmlformat" },
-    yaml = { "yamlfmt" },
+    yaml = { "prettierd" },
     -- python = { "isort", "black" },
     -- javascript = { { "prettierd", "prettier" } },
   },
