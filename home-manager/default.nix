@@ -67,6 +67,7 @@
     tmux
     tree
     trivy
+    yazi
     unzip
     usbutils # lsusb
     vault

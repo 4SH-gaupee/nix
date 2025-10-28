@@ -149,12 +149,12 @@ in {
             ])
           );
           type = "lua";
-          config = (builtins.readFile ./files/plugins/treesitter.lua);
+          config = builtins.readFile ./files/plugins/treesitter.lua;
         }
         {
           plugin = telescope-cc;
           type = "lua";
-          config = (builtins.readFile ./files/plugins/telescope.lua);
+          config = builtins.readFile ./files/plugins/telescope.lua;
         }
         {
           plugin = vim-better-whitespace;
@@ -181,7 +181,12 @@ in {
         {
           plugin = nvim-k8s-lsp;
           type = "lua";
-          config = (builtins.readFile ./files/plugins/nvim-k8s-lsp.lua);
+          config = builtins.readFile ./files/plugins/nvim-k8s-lsp.lua;
+        }
+        {
+          plugin = yazi-nvim;
+          type = "lua";
+          config = builtins.readFile ./files/plugins/yazi.lua;
         }
       ];
     };
