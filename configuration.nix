@@ -169,6 +169,7 @@
     displaylink
     gparted
     ntfs3g
+    luajitPackages.plenary-nvim
   ];
   programs.ssh.startAgent = true;
   programs.kdeconnect.enable = true;

@@ -44,6 +44,16 @@ with lib; let
       ref = "main";
     };
   };
+  yaml-schema-detect = pkgs.vimUtils.buildVimPlugin {
+    pname = "yaml-schema-detect";
+    buildInputs = [pkgs.vimPlugins.plenary-nvim];
+    version = "main";
+    src = builtins.fetchGit {
+      url = "https://github.com/cwrau/yaml-schema-detect.nvim.git";
+      rev = "605f81b2dc3243b61017db7099a808e8ea350566";
+      ref = "main";
+    };
+  };
 
   ## Dynamically create LSP servers configurations list regarding
   ## files in `./files/lsp`
@@ -185,6 +195,11 @@ in {
         }
         {
           plugin = yazi-nvim;
+          type = "lua";
+          config = builtins.readFile ./files/plugins/yazi.lua;
+        }
+        {
+          plugin = yaml-schema-detect;
           type = "lua";
           config = builtins.readFile ./files/plugins/yazi.lua;
         }
