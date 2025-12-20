@@ -176,6 +176,7 @@
   programs.kdeconnect.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.waydroid.enable = true;
+  programs.nix-ld.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.hack
